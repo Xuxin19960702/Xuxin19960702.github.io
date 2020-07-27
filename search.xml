@@ -4,11 +4,38 @@
   
     
     <entry>
+      <title>test2</title>
+      <link href="/2020/07/27/test2/"/>
+      <url>/2020/07/27/test2/</url>
+      
+        <content type="html"><![CDATA[<h1 id="一场游戏一场梦"><a href="#一场游戏一场梦" class="headerlink" title="一场游戏一场梦"></a>一场游戏一场梦</h1><h2 id="游戏人间"><a href="#游戏人间" class="headerlink" title="游戏人间"></a>游戏人间</h2><h3 id="梦里花落知多少"><a href="#梦里花落知多少" class="headerlink" title="梦里花落知多少"></a>梦里花落知多少</h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> 分类测试 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 标签测试 </tag>
+            
+            <tag> 随笔 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>test</title>
       <link href="/2020/07/23/test/"/>
       <url>/2020/07/23/test/</url>
       
-        <content type="html"><![CDATA[<p>测试：</p><p>分类</p><p>归档</p><p>标签</p>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>测试</p></blockquote><blockquote><p>分类</p></blockquote><p>归档</p><p>标签</p>]]></content>
       
       
       <categories>
