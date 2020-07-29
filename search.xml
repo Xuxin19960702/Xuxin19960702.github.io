@@ -4,11 +4,67 @@
   
     
     <entry>
+      <title>剑指offer 22</title>
+      <link href="/2020/07/29/arithmetic2/"/>
+      <url>/2020/07/29/arithmetic2/</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。例如，一个链表有6个节点，从头节点开始，它们的值依次是1、2、3、4、5、6。这个链表的倒数第3个节点是值为4的节点。</p><a id="more"></a><h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><blockquote><p>给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 k = 2.<br>返回链表 4-&gt;5.</p></blockquote><h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p><img src="/2020/07/29/arithmetic2/1.png" alt loading="lazy"></p><ol><li><strong>初始化：</strong> 前指针 <code>former</code> 、后指针 <code>latter</code> ，双指针都指向头节点 head​ </li><li><strong>构建双指针距离：</strong> 前指针 <code>former</code> 先向前走 kk 步（结束后，双指针 former 和 latter 间相距 kk 步）</li><li><strong>双指针共同移动：</strong> 循环中，双指针 former 和 latter 每轮都向前走一步，直至 former 走过链表 尾节点 时跳出（跳出后， latter 与尾节点距离为 k-1k−1，即 latter 指向倒数第 kk 个节点）</li><li><strong>返回值：</strong> 返回 latter 即可</li></ol><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><pre><code>```javapublic class ListNode {    #创建链表  int val;  ListNode next;  ListNode(int x) { val = x; }  }class Solution {    public ListNode getKthFromEnd(ListNode head, int k) {    ListNode former = head, latter = head;  #定义前指针，后指针    for(int i = 0; i &lt; k; i++){  #前指针后移k位        if(former == null) return null;        former = former.next;    }    while(former != null){    #前后指针一起后移，直至前指针为null        former = former.next;        latter = latter.next;    }    return  latter;}}```</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Java面试知识汇总</title>
+      <link href="/2020/07/28/java/"/>
+      <url>/2020/07/28/java/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Java-基本功"><a href="#Java-基本功" class="headerlink" title="Java 基本功"></a>Java 基本功</h1><h2 id="Java入门"><a href="#Java入门" class="headerlink" title="Java入门"></a>Java入门</h2><h3 id="Java语言有哪些特点"><a href="#Java语言有哪些特点" class="headerlink" title="Java语言有哪些特点?"></a>Java语言有哪些特点?</h3><ul><li>简单易学；</li><li>面向对象（<font color="#0099ff">封装，继承，多态</font>）；</li><li>平台无关性（Java虚拟机实现平台无关性）；</li><li>可靠性；</li><li>安全性；</li><li>支持多线程；</li><li>支持网络编程并且很方便；</li><li>编译和解释并存；</li></ul><hr><h3 id="Java-和-C-的区别"><a href="#Java-和-C-的区别" class="headerlink" title="Java 和 C++ 的区别"></a>Java 和 C++ 的区别</h3><ul><li>都是面向对象语言，都支持封装、继承和多态</li><li>Java不提供指针来直接访问内存，程序内存更加安全</li><li>Java的类是单继承的，C++支持多重继承；虽然Java的类不可以多继承，但是接口可以多继承</li><li>Java有自动内存管理机制，不需要程序员手动释放无用内存</li><li><strong>在C语言中，字符串或字符数组最后都会有一个额外的字符‘\0’来表示结束。但是，Java语言中没有结束符这个概念</strong></li></ul><hr><h3 id="什么是-Java-程序的主类-应用程序和小程序的主类有何不同"><a href="#什么是-Java-程序的主类-应用程序和小程序的主类有何不同" class="headerlink" title="什么是 Java 程序的主类 应用程序和小程序的主类有何不同?"></a>什么是 Java 程序的主类 应用程序和小程序的主类有何不同?</h3><p>一个程序中可以有很多个类，但只能有一个类是主类。在Java应用程序中，这个主类是指包含<font color="#0099ff">main()</font> 方法的类。而在Java小程序中，这个主类是一个继承自系统类JApplet或Applet的子类。应用程序的主类不一定要求是public类，但小程序的主类要求必须是public类。主类是Java程序执行的入口点。</p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java面试 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 面试 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>剑指offer 58 - II</title>
       <link href="/2020/07/27/arithmetic1/"/>
       <url>/2020/07/27/arithmetic1/</url>
       
-        <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。比如，输入字符串”abcdefg”和数字2，该函数将返回左旋转两位得到的结果”cdefgab”。</p><hr><a id="more"></a><h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><blockquote><p>输入：s = “abcdef”, k = 2<br>输出：”cdefgab”</p></blockquote><h2 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h2><blockquote><p>输入：s = “lrloseumgh”, k = 6<br>输出：”umghlrlose”</p></blockquote><hr><h1 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h1><ul><li>1 &lt;= k &lt; s.length &lt;= 10000</li></ul><hr><h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">reverseLeftWords</span><span class="params">(String s, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> s.substring(n) + s.substring(<span class="number">0</span>,n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre>]]></content>
+        <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。比如，输入字符串”abcdefg”和数字2，该函数将返回左旋转两位得到的结果”cdefgab”。</p><a id="more"></a><h1 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h1><blockquote><p>输入：s = “abcdef”, k = 2<br>输出：”cdefgab”</p></blockquote><h1 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h1><blockquote><p>输入：s = “lrloseumgh”, k = 6<br>输出：”umghlrlose”</p></blockquote><h1 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h1><ul><li>1 &lt;= k &lt; s.length &lt;= 10000</li></ul><h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><pre><code>```javaclass Solution {    public String reverseLeftWords(String s, int n) {        return s.substring(n) + s.substring(0,n);    }}```</code></pre>]]></content>
       
       
       <categories>
