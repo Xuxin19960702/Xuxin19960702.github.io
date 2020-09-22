@@ -5,14 +5,14 @@ categories: Windows系统安装
 archives:
 tags: Windows
 ---
-# Windows系统激活
+## Windows系统激活
 
-## 激活软件
+### 激活软件
 [KMS-VL-ALL-7.0-RC-汉化版.7z](KMS-VL-ALL-7.0-RC-汉化版.7z)
 
 
 ----------
 
-## 激活步骤
+### 激活步骤
 
 
