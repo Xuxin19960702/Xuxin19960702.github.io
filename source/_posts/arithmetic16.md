@@ -1,5 +1,5 @@
 ---
-title: 剑指 Offer 10- II. 青蛙跳台阶问题
+title: 剑指 Offer 10- II. 变态青蛙跳台阶问题
 date: 2021-07-06 23:20:00
 categories: 算法题
 archives:
