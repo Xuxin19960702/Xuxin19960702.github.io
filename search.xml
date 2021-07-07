@@ -4,6 +4,93 @@
   
     
     <entry>
+      <title>剑指 Offer 16. 数值的整数次方</title>
+      <link href="/2021/07/07/arithmetic19/"/>
+      <url>/2021/07/07/arithmetic19/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>实现 <a href="https://www.cplusplus.com/reference/valarray/pow/" target="_blank" rel="noopener">pow(<em>x</em>, <em>n</em>)</a> ，即计算 x 的 n 次幂函数（即，x<sup>n</sup>）。不得使用库函数，同时不需要考虑大数问题。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><blockquote><p>输入：x = 2.00000, n = 10</p><p>输出：1024.00000</p></blockquote><a id="more"></a><blockquote><p>输入：x = 2.00000, n = -2</p><p>输出：0.25000</p></blockquote><h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul><li>-100.0 &lt; x &lt; 100.0</li><li>-2<sup>31</sup> &lt;= n &lt;= 2<sup>31</sup>-1</li><li>-10<sup>4</sup> &lt;= x<sup>n</sup> &lt;= 10<sup>4</sup></li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol><li><p>当 x = 0 时：直接返回 0 （避免后续 x = 1 / x 操作报错）。</p></li><li><p>初始化 res = 1 ；</p></li><li><p>当 n &lt; 0 时：把问题转化至 n≥0 的范围内，即执行 x = 1/x ，n = - n ；</p></li><li><p>循环计算：当 n = 0 时跳出；</p><ol><li>当 n &amp; 1 = 1 时：将当前 x 乘入 res （即 res∗=x ）；</li><li>执行 x = x^2（即 x∗=x ）；</li><li>执行 n 右移一位（即 n &gt;&gt;= 1）。</li></ol></li><li><p>返回 res 。</p></li></ol><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>    <span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">myPow</span><span class="token punctuation">(</span><span class="token keyword">double</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>x <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>        <span class="token keyword">long</span> b <span class="token operator">=</span> n<span class="token punctuation">;</span>        <span class="token keyword">double</span> res <span class="token operator">=</span> <span class="token number">1.0</span><span class="token punctuation">;</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>b <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>            x <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">/</span> x<span class="token punctuation">;</span>            b <span class="token operator">=</span> <span class="token operator">-</span>b<span class="token punctuation">;</span>        <span class="token punctuation">}</span>        <span class="token keyword">while</span><span class="token punctuation">(</span>b <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span>b <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> res <span class="token operator">*=</span> x<span class="token punctuation">;</span>            x <span class="token operator">*=</span> x<span class="token punctuation">;</span>            b <span class="token operator">>>=</span> <span class="token number">1</span><span class="token punctuation">;</span>        <span class="token punctuation">}</span>        <span class="token keyword">return</span> res<span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指 Offer 05. 替换空格</title>
+      <link href="/2021/07/07/arithmetic18/"/>
+      <url>/2021/07/07/arithmetic18/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>请实现一个函数，把字符串 <code>s</code> 中的每个空格替换成”%20”。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><blockquote><p>输入：s = “We are happy.”</p><p>输出：”We%20are%20happy.”</p></blockquote><a id="more"></a><h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul><li>0 &lt;= s 的长度 &lt;= 10000</li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>我们可以通过循环判断字符串的字符是否为空格，是的话就利用append()方法添加追加“%20”，否则还是追加原字符</p><p>或者最简单的方法就是利用：replaceAll(String regex, String replacement)方法了</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>    <span class="token keyword">public</span> String <span class="token function">replaceSpace</span><span class="token punctuation">(</span>String s<span class="token punctuation">)</span> <span class="token punctuation">{</span>        StringBuilder res <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">for</span><span class="token punctuation">(</span>Character c <span class="token operator">:</span> s<span class="token punctuation">.</span><span class="token function">toCharArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>        <span class="token punctuation">{</span>            <span class="token keyword">if</span><span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token string">' '</span><span class="token punctuation">)</span> res<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"%20"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token keyword">else</span> res<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token punctuation">}</span>        <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre><pre class=" language-java"><code class="language-java"><span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Scanner<span class="token punctuation">;</span><span class="token comment" spellcheck="true">/** * 一行代码解决 * \ 转义字符。如果你要使用 "\" 本身，则应该使用 "\\"。String类型中的空格用"\s"表示，所以这里"\\s"就是代表空格的意思 */</span><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">replaceSpace</span> <span class="token punctuation">{</span>    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>        Scanner scanner <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>        String s <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token function">replaceSpace</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span>    <span class="token keyword">public</span> <span class="token keyword">static</span> String <span class="token function">replaceSpace</span><span class="token punctuation">(</span>String s<span class="token punctuation">)</span> <span class="token punctuation">{</span>        StringBuilder res <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replaceAll</span><span class="token punctuation">(</span><span class="token string">"\\s"</span><span class="token punctuation">,</span><span class="token string">"%20"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指 Offer 04. 二维数组中的查找</title>
+      <link href="/2021/07/07/arithmetic17/"/>
+      <url>/2021/07/07/arithmetic17/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个高效的函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><blockquote><p>现有矩阵 matrix 如下：</p><p>[<br>  [1,   4,  7, 11, 15],<br>  [2,   5,  8, 12, 19],<br>  [3,   6,  9, 16, 22],<br>  [10, 13, 14, 17, 24],<br>  [18, 21, 23, 26, 30]<br>]</p><p>给定 target = <code>5</code>，返回 <code>true</code>。</p><p>给定 target = <code>20</code>，返回 <code>false</code>。</p></blockquote><a id="more"></a><h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul><li>0 &lt;= n &lt;= 1000</li><li>0 &lt;= m &lt;= 1000</li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p><code>线性查找</code></p><p>由于给定的二维数组具备每行从左到右递增以及每列从上到下递增的特点，当访问到一个元素时，可以排除数组中的部分元素。</p><p>从二维数组的右上角开始查找。如果当前元素等于目标值，则返回 true。如果当前元素大于目标值，则移到左边一列。如果当前元素小于目标值，则移到下边一行。</p><p>可以证明这种方法不会错过目标值。如果当前元素大于目标值，说明当前元素的下边的所有元素都一定大于目标值，因此往下查找不可能找到目标值，往左查找可能找到目标值。如果当前元素小于目标值，说明当前元素的左边的所有元素都一定小于目标值，因此往左查找不可能找到目标值，往下查找可能找到目标值。</p><ul><li>若数组为空，返回 false</li><li>初始化行下标为 0，列下标为二维数组的列数减 1</li><li>重复下列步骤，直到行下标或列下标超出边界<ul><li>获得当前下标位置的元素 num</li><li>如果 num 和 target 相等，返回 true</li><li>如果 num 大于 target，列下标减 1</li><li>如果 num 小于 target，行下标加 1</li></ul></li><li>循环体执行完毕仍未找到元素等于 target ，说明不存在这样的元素，返回 false。</li></ul><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JumpFloorII</span> <span class="token punctuation">{</span>    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>        Scanner scanner <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">int</span> n <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token function">JumpFloorII</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span>    <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">JumpFloorII</span><span class="token punctuation">(</span><span class="token keyword">int</span> number<span class="token punctuation">)</span><span class="token punctuation">{</span>        <span class="token keyword">return</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token operator">--</span>number<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//2^(number-1)用位移操作进行，更快</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>IDEA快捷键</title>
       <link href="/2021/07/06/idea%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
       <url>/2021/07/06/idea%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
