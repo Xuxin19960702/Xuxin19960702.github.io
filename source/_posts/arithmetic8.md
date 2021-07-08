@@ -42,6 +42,7 @@ tags: [Java,算法,剑指offer]
  *     ListNode next;
  *     ListNode(int x) { val = x; }
  * }
+ * 递归方法
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
@@ -53,6 +54,29 @@ class Solution {
     head.next = null;
     return reverse;
 
+    }
+}
+```
+
+```java
+/**
+ * 顺序一个一个翻转
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode next = null;
+        ListNode pre = null;
+        while(head != null){
+            //保存要反转到头来的那个节点
+            next = head.next;
+            //要反转的那个节点指向已经反转的上一个节点
+            head.next = pre;
+            //上一个已经反转到头部的节点
+            pre = head;
+            //一直向链表尾走
+            head = next;
+        }
+		return pre;
     }
 }
 ```
