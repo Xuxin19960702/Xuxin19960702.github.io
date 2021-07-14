@@ -55,7 +55,7 @@ tags: [Java,算法,剑指offer]
 
 合法的结束状态有 2, 3, 7, 8 。
 
-![/](\arithmetic32\Picture1.png)
+![/](arithmetic32/Picture1.png)
 
 ## 代码
 
