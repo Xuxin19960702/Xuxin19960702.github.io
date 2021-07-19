@@ -4,6 +4,236 @@
   
     
     <entry>
+      <title>剑指 Offer 38. 字符串的排列</title>
+      <link href="/2021/07/19/arithmetic45/"/>
+      <url>/2021/07/19/arithmetic45/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入一个字符串，打印出该字符串中字符的所有排列。</p><p>你可以以任意顺序返回这个字符串数组，但里面不能有重复元素。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><blockquote><p>输入：s = “abc”</p><p>输出：[“abc”,”acb”,”bac”,”bca”,”cab”,”cba”]</p></blockquote><a id="more"></a><h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><p>1 &lt;= s 的长度 &lt;= 8</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol><li>终止条件： 当 x = len(c) - 1 时，代表所有位已固定（最后一位只有 11 种情况），则将当前组合 c 转化为字符串并加入 res ，并返回；</li><li>递推参数： 当前固定位 x ；</li><li>递推工作： 初始化一个 Set ，用于排除重复的字符；将第 x 位字符与 i \in∈ [x, len(c)] 字符分别交换，并进入下层递归；<ol><li>剪枝： 若 c[i] 在 Set 中，代表其是重复字符，因此 “剪枝” ；</li><li>将 c[i] 加入 Set ，以便之后遇到重复字符时剪枝；</li><li>固定字符： 将字符 c[i] 和 c[x] 交换，即固定 c[i] 为当前位字符；</li><li>开启下层递归： 调用 dfs(x + 1) ，即开始固定第 x + 1 个字符；</li><li>还原交换： 将字符 c[i] 和 c[x] 交换（还原之前的交换）；</li></ol></li></ol><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>    List<span class="token operator">&lt;</span>String<span class="token operator">></span> res <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span> c<span class="token punctuation">;</span>    <span class="token keyword">public</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">permutation</span><span class="token punctuation">(</span>String s<span class="token punctuation">)</span> <span class="token punctuation">{</span>        c <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">toCharArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token function">dfs</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token function">toArray</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span>res<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span>    <span class="token keyword">void</span> <span class="token function">dfs</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>x <span class="token operator">==</span> c<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>            res<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>String<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">// 添加排列方案</span>            <span class="token keyword">return</span><span class="token punctuation">;</span>        <span class="token punctuation">}</span>        HashSet<span class="token operator">&lt;</span>Character<span class="token operator">></span> set <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> x<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> c<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>            <span class="token keyword">if</span><span class="token punctuation">(</span>set<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">continue</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 重复，因此剪枝</span>            set<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>c<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token function">swap</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>                      <span class="token comment" spellcheck="true">// 交换，将 c[i] 固定在第 x 位</span>            <span class="token function">dfs</span><span class="token punctuation">(</span>x <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                      <span class="token comment" spellcheck="true">// 开启固定第 x + 1 位字符</span>            <span class="token function">swap</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>                      <span class="token comment" spellcheck="true">// 恢复交换</span>        <span class="token punctuation">}</span>    <span class="token punctuation">}</span>    <span class="token keyword">void</span> <span class="token function">swap</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">char</span> tmp <span class="token operator">=</span> c<span class="token punctuation">[</span>a<span class="token punctuation">]</span><span class="token punctuation">;</span>        c<span class="token punctuation">[</span>a<span class="token punctuation">]</span> <span class="token operator">=</span> c<span class="token punctuation">[</span>b<span class="token punctuation">]</span><span class="token punctuation">;</span>        c<span class="token punctuation">[</span>b<span class="token punctuation">]</span> <span class="token operator">=</span> tmp<span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指 Offer 36. 二叉搜索树与双向链表</title>
+      <link href="/2021/07/19/arithmetic44/"/>
+      <url>/2021/07/19/arithmetic44/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的循环双向链表。要求不能创建任何新的节点，只能调整树中节点指针的指向。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p><img src="/2021/07/19/arithmetic44/bstdlloriginalbst.png" alt="/" loading="lazy"></p><a id="more"></a><p>我们希望将这个二叉搜索树转化为双向循环链表。链表中的每个节点都有一个前驱和后继指针。对于双向循环链表，第一个节点的前驱是最后一个节点，最后一个节点的后继是第一个节点。</p><p>下图展示了上面的二叉搜索树转化成的链表。“head” 表示指向链表中有最小元素的节点。</p><p><img src="/2021/07/19/arithmetic44/bstdllreturndll.png" alt="/" loading="lazy"></p><h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><p>特别地，我们希望可以就地完成转换操作。当转化完成以后，树中节点的左指针需要指向前驱，树中节点的右指针需要指向后继。还需要返回链表中的第一个节点的指针。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p><code>dfs(cur):</code> 递归法中序遍历；</p><ol><li><strong>终止条件：</strong> 当节点 cur 为空，代表越过叶节点，直接返回；</li><li>递归左子树，即 dfs(cur.left) ；</li><li><strong>构建链表：</strong><ol><li><strong>当 pre 为空时：</strong> 代表正在访问链表头节点，记为 head ；</li><li><strong>当 pre 不为空时：</strong> 修改双向节点引用，即 pre.right = cur ， cur.left = pre ；</li><li><strong>保存 cur ：</strong> 更新 pre = cur ，即节点 cur 是后继节点的 pre ；</li></ol></li><li>递归右子树，即 dfs(cur.right) ；</li></ol><p><code>treeToDoublyList(root)</code>：</p><ol><li><strong>特例处理：</strong> 若节点 root 为空，则直接返回；</li><li><strong>初始化：</strong> 空节点 pre ；</li><li><strong>转化为双向链表：</strong> 调用 dfs(root) ；</li><li><strong>构建循环链表：</strong> 中序遍历完成后，head 指向头节点， pre 指向尾节点，因此修改 head 和 pre 的双向节点引用即可；</li><li><strong>返回值：</strong> 返回链表的头节点 head 即可；</li></ol><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>    Node pre<span class="token punctuation">,</span> head<span class="token punctuation">;</span>    <span class="token keyword">public</span> Node <span class="token function">treeToDoublyList</span><span class="token punctuation">(</span>Node root<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>root <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token keyword">return</span> null<span class="token punctuation">;</span>        <span class="token function">dfs</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>        head<span class="token punctuation">.</span>left <span class="token operator">=</span> pre<span class="token punctuation">;</span>        pre<span class="token punctuation">.</span>right <span class="token operator">=</span> head<span class="token punctuation">;</span>        <span class="token keyword">return</span> head<span class="token punctuation">;</span>    <span class="token punctuation">}</span>    <span class="token keyword">void</span> <span class="token function">dfs</span><span class="token punctuation">(</span>Node cur<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>cur <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>        <span class="token function">dfs</span><span class="token punctuation">(</span>cur<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>pre <span class="token operator">!=</span> null<span class="token punctuation">)</span> pre<span class="token punctuation">.</span>right <span class="token operator">=</span> cur<span class="token punctuation">;</span>        <span class="token keyword">else</span> head <span class="token operator">=</span> cur<span class="token punctuation">;</span>        cur<span class="token punctuation">.</span>left <span class="token operator">=</span> pre<span class="token punctuation">;</span>        pre <span class="token operator">=</span> cur<span class="token punctuation">;</span>        <span class="token function">dfs</span><span class="token punctuation">(</span>cur<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指 Offer 42. 连续子数组的最大和</title>
+      <link href="/2021/07/19/arithmetic43/"/>
+      <url>/2021/07/19/arithmetic43/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入一个整型数组，数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><blockquote><p>输入：nums = [-2,1,-3,4,-1,2,1,-5,4]</p><p>输出：6</p><p>解释：连续子数组 [4,-1,2,1] 的和最大，为 6。</p></blockquote><a id="more"></a><h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul><li><code>1 &lt;= arr.length &lt;= 10^5</code></li><li><code>-100 &lt;= arr[i] &lt;= 100</code></li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol><li><p><strong>状态定义：</strong> 设动态规划列表 dp ，dp[i] 代表以元素 nums[i] 为结尾的连续子数组最大和。</p><ul><li>为何定义最大和 dp[i] 中必须包含元素 nums[i] ：保证 dp[i] 递推到 dp[i+1] 的正确性；如果不包含 nums[i] ，递推时则不满足题目的 <strong>连续子数组</strong> 要求。</li></ul></li><li><p><strong>转移方程：</strong> 若 dp[i−1]≤0 ，说明 dp[i - 1] 对 dp[i] 产生负贡献，即 dp[i−1]+nums[i] 还不如 nums[i] 本身大。</p><ul><li>当 dp[i−1]&gt;0 时：执行 dp[i]=dp[i−1]+nums[i] ；</li><li>当 dp[i−1]≤0 时：执行 dp[i]=nums[i] ；</li></ul></li><li><p><strong>初始状态：</strong> dp[0]=nums[0]，即以 nums[0]] 结尾的连续子数组最大和为 nums[0] 。</p></li><li><p><strong>返回值：</strong> 返回 dp 列表中的最大值，代表全局最大值。</p></li></ol><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">maxSubArray</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">int</span> res <span class="token operator">=</span> nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>            nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            res <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token punctuation">}</span>        <span class="token keyword">return</span> res<span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>2021年提前批+秋招面经</title>
+      <link href="/2021/07/19/%E9%9D%A2%E7%BB%8F/"/>
+      <url>/2021/07/19/%E9%9D%A2%E7%BB%8F/</url>
+      
+        <content type="html"><![CDATA[<h2 id="字节跳动提前批："><a href="#字节跳动提前批：" class="headerlink" title="字节跳动提前批："></a>字节跳动提前批：</h2><h3 id="一面："><a href="#一面：" class="headerlink" title="一面："></a><strong>一面：</strong></h3><ol><li>自我介绍</li><li>Lucene引擎和现在市面上的引擎有什么区别吗？（项目里的知识点）</li><li>Lucene是怎么实现快速搜索的？（项目里的知识点）</li><li>在你实习的过程中做过哪些需求？</li></ol><a id="more"></a><ol><li><p>数据库的索引是怎么实现的？</p></li><li><p>读取一条信息，访问几次存储？</p></li><li><p>I/O任务和CPU任务有什么区别？</p></li><li><p>解释一下线程和进程</p></li><li><p>多线程 和 多进程 如何选择？</p></li><li><p>rest API 了解吗？（谈到了项目里调用接口，所以问了这个问题）</p></li><li><p>算法题：数字数组里去重，不可用额外空间变量，不可用set</p><blockquote><p>例：[1,1,2,2,2,3,4,4,4,4,5,6,6]</p><p>答案：[1,2,3,4,5,6]</p></blockquote></li></ol><h3 id="二面："><a href="#二面：" class="headerlink" title="二面："></a><strong>二面：</strong></h3><ol><li><p>自我介绍</p></li><li><p>实习负责的项目业务详细的说一下</p></li><li><p>计算机的存储过程（提示了从硬盘和内存角度） <code>我是一脸懵，实在不理解从哪答</code></p></li><li><p>比catch更快的部件是什么？</p></li><li><p>为什么会有存储层级（寄存器、catch，内存、硬盘）？</p></li><li><p>三次握手</p></li><li><p>三次握手能保证可靠的链接吗？为什么不是四次、五次……握手？</p></li><li><p>四次握手会比三次握手更可靠吗？更可靠的话，增加的可靠概率可以算一下吗？</p></li><li><p>两个Json文件合并，有重复key的元素不合并，value可能还是个Json（嵌套），说下大概思路？</p></li><li><p>写代码需要大概多久写出来？尝试写一下。</p></li><li><p>再来一道算法题，给一个存有字母的数组，求第一个在数组中不重复的字母，O(n²)时间复杂度毋庸置疑可以实现，有没有更好的解法？</p><blockquote><p>例：[A,B,F,E,D,B,A,C]</p><p>输出：F</p></blockquote></li></ol><h2 id="大华提前批："><a href="#大华提前批：" class="headerlink" title="大华提前批："></a>大华提前批：</h2><h3 id="一面：-1"><a href="#一面：-1" class="headerlink" title="一面："></a>一面：</h3><ol><li><p>自我介绍</p></li><li><p>访客认证是怎么实现的？（项目里的知识点）</p></li><li><p>项目负责过程中，碰到过哪些难的任务？</p></li><li><p>重写和重载，重载可以只更改返回值类型吗？</p></li><li><p>类加载过程（我回答成Java对象创建的过程了，啊！！！！！🤦‍♂️）</p><ul><li>Java类加载过程主要可以分为三个步骤：加载、连接、初始化。</li><li>加载过程是Java将字节码数据从不同的数据源读取到JVM中，映射为JVM认可的数据结构。</li><li>连接是把原始的类定义信息平滑地转入JVM运行的过程中。这一阶段可以细分为验证、准备、解析三步。</li><li>初始化是执行类初始化的代码逻辑，包括静态字段赋值的动作，以及执行类定义中的静态初始化块内的逻辑。 </li></ul></li><li><p>JVM区域分布</p><ul><li>线程私有：<ul><li>程序计数器</li><li>虚拟机栈</li><li>本地方法栈</li></ul></li><li>线程共享：<ul><li>堆</li><li>方法区（元空间）</li><li>直接内存</li></ul></li></ul></li><li><p>SpringBoot中<code>@transactional</code>标签的作用？什么情况下无效？</p></li><li><p>new String(“abc”) 创建几个对象？</p></li><li><p>数据库搜索（B+树）</p></li><li><p>联合索引（例如索引是key index (a,b,c)。 可以支持a | a,b| a,b,c 3种组合进行查找，但不支持 b,c进行查找 .当最左侧字段是常量引用时，索引就十分有效。）</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java面试 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 面试 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指 Offer 40. 最小的k个数</title>
+      <link href="/2021/07/18/arithmetic41/"/>
+      <url>/2021/07/18/arithmetic41/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入整数数组 <code>arr</code> ，找出其中最小的 <code>k</code> 个数。例如，输入4、5、1、6、2、7、3、8这8个数字，则最小的4个数字是1、2、3、4。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><blockquote><p>输入：arr = [3,2,1], k = 2</p><p>输出：[1,2] 或者 [2,1]</p></blockquote><a id="more"></a><h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul><li><code>0 &lt;= k &lt;= arr.length &lt;= 10000</code></li><li><code>0 &lt;= arr[i] &lt;= 10000</code></li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>对原数组从小到大排序后取出前 <em>k</em> 个数即可。</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>    <span class="token keyword">public</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">getLeastNumbers</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr<span class="token punctuation">,</span> <span class="token keyword">int</span> k<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> vec <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">;</span>        Arrays<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> k<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>            vec<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>        <span class="token punctuation">}</span>        <span class="token keyword">return</span> vec<span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指 Offer 30. 包含min函数的栈</title>
+      <link href="/2021/07/18/arithmetic42/"/>
+      <url>/2021/07/18/arithmetic42/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的 min 函数在该栈中，调用 min、push 及 pop 的时间复杂度都是 O(1)。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><blockquote><p>MinStack minStack = new MinStack();<br>minStack.push(-2);<br>minStack.push(0);<br>minStack.push(-3);<br>minStack.min();   –&gt; 返回 -3.<br>minStack.pop();<br>minStack.top();      –&gt; 返回 0.<br>minStack.min();   –&gt; 返回 -2.</p></blockquote><a id="more"></a><h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul><li>各函数的调用总次数不超过 20000 次</li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol><li><p>push(x) 函数： 重点为保持栈 B 的元素是 非严格降序 的。</p><ul><li>将 x 压入栈 A （即 A.add(x) ）；</li><li>若 ① 栈 B 为空 或 ② x 小于等于 栈 B 的栈顶元素，则将 x 压入栈 B （即 B.add(x) ）。</li></ul></li><li><p>pop() 函数： 重点为保持栈 A, B 的 元素一致性 。</p><ul><li>执行栈 A 出栈（即 A.pop() ），将出栈元素记为 y ；</li><li>若 y 等于栈 B 的栈顶元素，则执行栈 B 出栈（即 B.pop() ）。</li></ul></li><li><p>top() 函数： 直接返回栈 A 的栈顶元素即可，即返回 A.peek() 。</p></li><li><p>min() 函数： 直接返回栈 B 的栈顶元素即可，即返回 B.peek() 。</p></li></ol><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">MinStack</span> <span class="token punctuation">{</span>    Stack<span class="token operator">&lt;</span>Integer<span class="token operator">></span> A<span class="token punctuation">,</span> B<span class="token punctuation">;</span>    <span class="token keyword">public</span> <span class="token function">MinStack</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>        A <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Stack</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        B <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Stack</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span>    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">push</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>        A<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>B<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">||</span> B<span class="token punctuation">.</span><span class="token function">peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">>=</span> x<span class="token punctuation">)</span>            B<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span>    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>A<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>B<span class="token punctuation">.</span><span class="token function">peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>            B<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span>    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">return</span> A<span class="token punctuation">.</span><span class="token function">peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span>    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">min</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">return</span> B<span class="token punctuation">.</span><span class="token function">peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指 Offer 35. 复杂链表的复制</title>
+      <link href="/2021/07/17/arithmetic40/"/>
+      <url>/2021/07/17/arithmetic40/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>请实现 copyRandomList 函数，复制一个复杂链表。在复杂链表中，每个节点除了有一个 next 指针指向下一个节点，还有一个 random 指针指向链表中的任意节点或者 null。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><blockquote><p>输入：head = [[7,null],[13,0],[11,4],[10,2],[1,0]]</p><p>输出：[[7,null],[13,0],[11,4],[10,2],[1,0]]</p></blockquote><a id="more"></a><h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul><li><code>-10000 &lt;= Node.val &lt;= 10000</code></li><li><code>Node.random</code> 为空（null）或指向链表中的节点。</li><li>节点数目不超过 1000 。</li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p><strong>方法一（哈希表）：</strong></p><ol><li>若头节点 head 为空节点，直接返回 nullnull ；</li><li><strong>初始化：</strong> 哈希表 dic ， 节点 cur 指向头节点；</li><li><strong>复制链表：</strong><ul><li>建立新节点，并向 dic 添加键值对 (原 cur 节点, 新 cur 节点） ；</li><li>cur 遍历至原链表下一节点；</li></ul></li><li><strong>构建新链表的引用指向：</strong><ul><li>构建新节点的 next 和 random 引用指向；</li><li>cur 遍历至原链表下一节点；</li></ul></li><li><strong>返回值：</strong> 新链表的头节点 dic[cur] ；</li></ol><p><strong>方法二（拼接+拆分）</strong></p><ol><li><strong>复制各节点，构建拼接链表:</strong><ul><li>设原链表为 node1→node2→⋯ ，构建的拼接链表如下所示：</li></ul></li></ol><p>​                           node1→node1 new→node2→node2 new→⋯</p><ol start="2"><li><p><strong>构建新链表各节点的 random 指向：</strong></p><ul><li>当访问原节点 cur 的随机指向节点 cur.random 时，对应新节点 cur.next 的随机指向节点为 cur.random.next 。</li></ul></li><li><p><strong>拆分原 / 新链表：</strong></p><ul><li>设置 pre / cur 分别指向原 / 新链表头节点，遍历执行 pre.next = pre.next.next 和 cur.next = cur.next.next 将两链表拆分开。</li></ul></li><li><p>返回新链表的头节点 res 即可。</p></li></ol><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 方法一（哈希表）</span><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>    <span class="token keyword">public</span> Node <span class="token function">copyRandomList</span><span class="token punctuation">(</span>Node head<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>head <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token keyword">return</span> null<span class="token punctuation">;</span>        Node cur <span class="token operator">=</span> head<span class="token punctuation">;</span>        Map<span class="token operator">&lt;</span>Node<span class="token punctuation">,</span> Node<span class="token operator">></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">// 3. 复制各节点，并建立 “原节点 -> 新节点” 的 Map 映射</span>        <span class="token keyword">while</span><span class="token punctuation">(</span>cur <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>            map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>cur<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span>cur<span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            cur <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>        <span class="token punctuation">}</span>        cur <span class="token operator">=</span> head<span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">// 4. 构建新链表的 next 和 random 指向</span>        <span class="token keyword">while</span><span class="token punctuation">(</span>cur <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>            map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>cur<span class="token punctuation">)</span><span class="token punctuation">.</span>next <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>cur<span class="token punctuation">.</span>next<span class="token punctuation">)</span><span class="token punctuation">;</span>            map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>cur<span class="token punctuation">)</span><span class="token punctuation">.</span>random <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>cur<span class="token punctuation">.</span>random<span class="token punctuation">)</span><span class="token punctuation">;</span>            cur <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>        <span class="token punctuation">}</span>        <span class="token comment" spellcheck="true">// 5. 返回新链表的头节点</span>        <span class="token keyword">return</span> map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 方法二（拼接+拆分）</span><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>    <span class="token keyword">public</span> Node <span class="token function">copyRandomList</span><span class="token punctuation">(</span>Node head<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>head <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token keyword">return</span> null<span class="token punctuation">;</span>        Node cur <span class="token operator">=</span> head<span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">// 1. 复制各节点，并构建拼接链表</span>        <span class="token keyword">while</span><span class="token punctuation">(</span>cur <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>            Node tmp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span>cur<span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>            tmp<span class="token punctuation">.</span>next <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>            cur<span class="token punctuation">.</span>next <span class="token operator">=</span> tmp<span class="token punctuation">;</span>            cur <span class="token operator">=</span> tmp<span class="token punctuation">.</span>next<span class="token punctuation">;</span>        <span class="token punctuation">}</span>        <span class="token comment" spellcheck="true">// 2. 构建各新节点的 random 指向</span>        cur <span class="token operator">=</span> head<span class="token punctuation">;</span>        <span class="token keyword">while</span><span class="token punctuation">(</span>cur <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>            <span class="token keyword">if</span><span class="token punctuation">(</span>cur<span class="token punctuation">.</span>random <span class="token operator">!=</span> null<span class="token punctuation">)</span>                cur<span class="token punctuation">.</span>next<span class="token punctuation">.</span>random <span class="token operator">=</span> cur<span class="token punctuation">.</span>random<span class="token punctuation">.</span>next<span class="token punctuation">;</span>            cur <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">.</span>next<span class="token punctuation">;</span>        <span class="token punctuation">}</span>        <span class="token comment" spellcheck="true">// 3. 拆分两链表</span>        cur <span class="token operator">=</span> head<span class="token punctuation">.</span>next<span class="token punctuation">;</span>        Node pre <span class="token operator">=</span> head<span class="token punctuation">,</span> res <span class="token operator">=</span> head<span class="token punctuation">.</span>next<span class="token punctuation">;</span>        <span class="token keyword">while</span><span class="token punctuation">(</span>cur<span class="token punctuation">.</span>next <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>            pre<span class="token punctuation">.</span>next <span class="token operator">=</span> pre<span class="token punctuation">.</span>next<span class="token punctuation">.</span>next<span class="token punctuation">;</span>            cur<span class="token punctuation">.</span>next <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">.</span>next<span class="token punctuation">;</span>            pre <span class="token operator">=</span> pre<span class="token punctuation">.</span>next<span class="token punctuation">;</span>            cur <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>        <span class="token punctuation">}</span>        pre<span class="token punctuation">.</span>next <span class="token operator">=</span> null<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 单独处理原链表尾节点</span>        <span class="token keyword">return</span> res<span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">// 返回新链表头节点</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指 Offer 18. 删除链表的节点</title>
+      <link href="/2021/07/17/arithmetic39/"/>
+      <url>/2021/07/17/arithmetic39/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定单向链表的头指针和一个要删除的节点的值，定义一个函数删除该节点。</p><p>返回删除后的链表的头节点。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><blockquote><p>输入：head = [4,5,1,9], val = 5</p><p>输出：[4,1,9]</p><p>解释：给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9.</p></blockquote><a id="more"></a><h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul><li>题目保证链表中节点的值互不相同</li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol><li>特例处理： 当应删除头节点 head 时，直接返回 head.next 即可。</li><li>初始化： pre = head , cur = head.next 。</li><li>定位节点： 当 cur 为空 或 cur 节点值等于 val 时跳出。<ul><li>保存当前节点索引，即 pre = cur 。</li><li>遍历下一节点，即 cur = cur.next 。</li></ul></li><li>删除节点： 若 cur 指向某节点，则执行 pre.next = cur.next ；若 cur 指向 null ，代表链表中不包含值为 val 的节点。</li><li>返回值： 返回链表头部节点 head 即可。</li></ol><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>    <span class="token keyword">public</span> ListNode <span class="token function">deleteNode</span><span class="token punctuation">(</span>ListNode head<span class="token punctuation">,</span> <span class="token keyword">int</span> val<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>head<span class="token punctuation">.</span>val <span class="token operator">==</span> val<span class="token punctuation">)</span> <span class="token keyword">return</span> head<span class="token punctuation">.</span>next<span class="token punctuation">;</span>        ListNode pre <span class="token operator">=</span> head<span class="token punctuation">,</span> cur <span class="token operator">=</span> head<span class="token punctuation">.</span>next<span class="token punctuation">;</span>        <span class="token keyword">while</span><span class="token punctuation">(</span>cur <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>            <span class="token keyword">if</span><span class="token punctuation">(</span>cur<span class="token punctuation">.</span>val <span class="token operator">==</span> val<span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>            pre <span class="token operator">=</span> cur<span class="token punctuation">;</span>            cur <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>        <span class="token punctuation">}</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>cur <span class="token operator">!=</span> null<span class="token punctuation">)</span> pre<span class="token punctuation">.</span>next <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>        <span class="token keyword">return</span> head<span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>合并区间</title>
       <link href="/2021/07/16/arithmetic38/"/>
       <url>/2021/07/16/arithmetic38/</url>
