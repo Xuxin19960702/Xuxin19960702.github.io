@@ -4,6 +4,64 @@
   
     
     <entry>
+      <title>剑指 Offer 34. 二叉树中和为某一值的路径</title>
+      <link href="/2021/07/21/arithmetic50/"/>
+      <url>/2021/07/21/arithmetic50/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入一棵二叉树和一个整数，打印出二叉树中节点值的和为输入整数的所有路径。从树的根节点开始往下一直到叶节点所经过的节点形成一条路径。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><blockquote><p>输入：给定如下二叉树，以及目标和 <code>target = 22</code></p><pre><code>          5         / \        4   8       /   / \      11  13  4     /  \    / \    7    2  5   1</code></pre><p>输出：</p><p>[<br>   [5,4,11,2],<br>   [5,8,4,5]<br>]</p></blockquote><a id="more"></a><h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul><li><code>节点总数 &lt;= 10000</code></li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol><li><p>pathSum(root, sum) 函数：</p><ol><li>初始化： 结果列表 res ，路径列表 path 。</li><li>返回值： 返回 res 即可。</li></ol></li><li><p>recur(root, tar) 函数：</p><ol><li>递推参数： 当前节点 root ，当前目标值 tar 。</li><li>终止条件： 若节点 root 为空，则直接返回。</li><li>递推工作：<ul><li>路径更新： 将当前节点值 root.val 加入路径 path ；</li><li>目标值更新： tar = tar - root.val（即目标值 tar 从 sum 减至 00 ）；</li><li>路径记录： 当 ① root 为叶节点 且 ② 路径和等于目标值 ，则将此路径 path 加入 res 。</li><li>先序遍历： 递归左 / 右子节点。</li><li>路径恢复： 向上回溯前，需要将当前节点从路径 path 中删除，即执行 path.pop() 。</li></ul></li></ol></li></ol><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>    LinkedList<span class="token operator">&lt;</span>List<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> res <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    LinkedList<span class="token operator">&lt;</span>Integer<span class="token operator">></span> path <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token keyword">public</span> List<span class="token operator">&lt;</span>List<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> <span class="token function">pathSum</span><span class="token punctuation">(</span>TreeNode root<span class="token punctuation">,</span> <span class="token keyword">int</span> sum<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token function">recur</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> sum<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">return</span> res<span class="token punctuation">;</span>    <span class="token punctuation">}</span>    <span class="token keyword">void</span> <span class="token function">recur</span><span class="token punctuation">(</span>TreeNode root<span class="token punctuation">,</span> <span class="token keyword">int</span> tar<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>root <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>        path<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>        tar <span class="token operator">-=</span> root<span class="token punctuation">.</span>val<span class="token punctuation">;</span>        <span class="token keyword">if</span><span class="token punctuation">(</span>tar <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> root<span class="token punctuation">.</span>left <span class="token operator">==</span> null <span class="token operator">&amp;&amp;</span> root<span class="token punctuation">.</span>right <span class="token operator">==</span> null<span class="token punctuation">)</span>            res<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">LinkedList</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token function">recur</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">,</span> tar<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token function">recur</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">,</span> tar<span class="token punctuation">)</span><span class="token punctuation">;</span>        path<span class="token punctuation">.</span><span class="token function">removeLast</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指 Offer 50. 第一个只出现一次的字符</title>
+      <link href="/2021/07/21/arithmetic49/"/>
+      <url>/2021/07/21/arithmetic49/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>在字符串 s 中找出第一个只出现一次的字符。如果没有，返回一个单空格。 s 只包含小写字母。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><blockquote><p>输入：”abaccdeff”</p><p>输出：”b”</p></blockquote><a id="more"></a><h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul><li>0 &lt;= s 的长度 &lt;= 50000</li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol><li><strong>初始化：</strong> HashMap，记为 dic ；</li><li><strong>字符统计：</strong> 遍历字符串 s 中的每个字符 c ；<ul><li>若 dic 中 <strong>不包含</strong> 键(key) c ：则向 dic 中添加键值对 (c, True) ，代表字符 c 的数量为 1 ；</li><li>若 dic 中 <strong>包含</strong> 键(key) c ：则修改键 c 的键值对为 (c, False) ，代表字符 c 的数量 &gt; 1。</li></ul></li><li><strong>查找数量为 1 的字符：</strong> 遍历字符串 s 中的每个字符 c ；<ul><li>若 dic中键 c 对应的值为 True ：，则返回 c 。</li></ul></li><li>返回 ‘ ‘ ，代表字符串无数量为 1 的字符。</li></ol><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>    <span class="token keyword">public</span> <span class="token keyword">char</span> <span class="token function">firstUniqChar</span><span class="token punctuation">(</span>String s<span class="token punctuation">)</span> <span class="token punctuation">{</span>        HashMap<span class="token operator">&lt;</span>Character<span class="token punctuation">,</span> Boolean<span class="token operator">></span> dic <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span> sc <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">toCharArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">char</span> c <span class="token operator">:</span> sc<span class="token punctuation">)</span>            dic<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> <span class="token operator">!</span>dic<span class="token punctuation">.</span><span class="token function">containsKey</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">char</span> c <span class="token operator">:</span> sc<span class="token punctuation">)</span>            <span class="token keyword">if</span><span class="token punctuation">(</span>dic<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> c<span class="token punctuation">;</span>        <span class="token keyword">return</span> <span class="token string">' '</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>剑指 Offer 33. 二叉搜索树的后序遍历序列</title>
       <link href="/2021/07/20/arithmetic48/"/>
       <url>/2021/07/20/arithmetic48/</url>
