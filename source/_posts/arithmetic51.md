@@ -1,5 +1,5 @@
 ---
-title: 剑指 Offer 56 - I. 数组中数字出现的次数
+title: 剑指 Offer 56 - II. 数组中数字出现的次数 II
 date: 2021-07-22 23:48:00
 categories: 算法题
 archives:
@@ -8,56 +8,73 @@ tags: [Java,算法,剑指offer]
 
 ## 题目
 
-一个整型数组 `nums` 里除两个数字之外，其他数字都出现了两次。请写程序找出这两个只出现一次的数字。要求时间复杂度是O(n)，空间复杂度是O(1)。
+在一个数组 `nums` 中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。
 
 ## 示例
 
-> 输入：nums = [4,1,4,6]
+> 输入：nums = [3,4,3,3]
 >
->    输出：[1,6] 或 [6,1]
->    
+>    输出：4
 
 <!--more-->
 
 ## 限制
 
-- `2 <= nums.length <= 10000`
+- `1 <= nums.length <= 10000`
+- `1 <= nums[i] < 2^31`
 
 ## 思路 
 
-1. **遍历 nums 执行异或：**
-   - 设整型数组 nums = [a, a, b, b, ..., x, y]，对 nums 中所有数字执行异或，得到的结果为 x⊕y ，即：
-     	     a⊕a⊕b⊕b⊕...⊕x⊕y
-           = 0⊕0⊕...⊕x⊕y
-           = x⊕y
-2. **循环左移计算 m：**
-   - 根据异或运算定义，若整数 x⊕y 某二进制位为 1 ，则 x 和 y 的此二进制位一定不同。换言之，找到 x⊕y 某为 11 的二进制位，即可将数组 nums 拆分为上述的两个子数组。根据与运算特点，可知对于任意整数 a 有：
-     - 若 a \& 0001 = 1 ，则 a 的第一位为 1 ；
-     - 若 a \& 0010 = 1，则 a 的第二位为 1 ；
-     - 以此类推……
-   - 因此，初始化一个辅助变量 m = 1 ，通过与运算从右向左循环判断，可 **获取整数** **x⊕y 首位 1** ，记录于 m 中。
-3. **拆分 nums 为两个子数组：**
-4. **分别遍历两个子数组执行异或：**
-   - 通过遍历判断 nums 中各数字和 m做与运算的结果，可将数组拆分为两个子数组，并分别对两个子数组遍历求异或，则可得到两个只出现一次的数字。
-5. **返回值**：
-   - 返回只出现一次的数字 x, y 即可。
+[力扣题解]: https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/solution/mian-shi-ti-56-ii-shu-zu-zhong-shu-zi-chu-xian-d-4/
+
+
 
 ## 代码
 
 ```java
+//方法一 遍历统计
 class Solution {
-    public int[] singleNumbers(int[] nums) {
-        int x = 0, y = 0, n = 0, m = 1;
-        for(int num : nums)               // 1. 遍历异或
-            n ^= num;
-        while((n & m) == 0)               // 2. 循环左移，计算 m
-            m <<= 1;
-        for(int num: nums) {              // 3. 遍历 nums 分组
-            if((num & m) != 0) x ^= num;  // 4. 当 num & m != 0
-            else y ^= num;                // 4. 当 num & m == 0
+    public int singleNumber(int[] nums) {
+        int[] counts = new int[32];
+        for(int num : nums) {
+            for(int j = 0; j < 32; j++) {
+                counts[j] += num & 1;
+                num >>>= 1;
+            }
         }
-        return new int[] {x, y};          // 5. 返回出现一次的数字
+        int res = 0, m = 3;
+        for(int i = 0; i < 32; i++) {
+            res <<= 1;
+            res |= counts[31 - i] % m;
+        }
+        return res;
     }
 }
+```
+
+```java
+//方法二 HashMap
+ public int singleNumber(int[] nums) {
+        Map<Integer, Integer> map = new HashMap();
+
+        for(int i = nums.length - 1; i >= 0; --i){
+            int key = nums[i];
+            if(!map.containsKey(key)){
+                // 如果之前没有遇到这一数字，则放入 map 中
+                map.put(key, 1);
+            }else{
+                // 如果之前遇到过这一数字，则出现次数加 1
+                map.put(key, map.get(key) + 1);
+            }
+        }
+
+        for(Map.Entry<Integer, Integer> entry: map.entrySet()){
+            if(entry.getValue() == 1){
+                return entry.getKey();
+            }
+        }
+
+        return -1;
+    }
 ```
 
