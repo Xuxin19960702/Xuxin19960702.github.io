@@ -1,5 +1,5 @@
 ---
-title:剑指 Offer 45. 把数组排成最小的数
+title: 剑指 Offer 45. 把数组排成最小的数
 date: 2021-07-24 23:36:00
 categories: 算法题
 archives:

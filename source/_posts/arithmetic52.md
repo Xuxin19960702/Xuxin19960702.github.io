@@ -1,5 +1,5 @@
 ---
-title:剑指 Offer 57. 和为s的两个数字
+title: 剑指 Offer 57. 和为s的两个数字
 date: 2021-07-24 23:29:00
 categories: 算法题
 archives:
