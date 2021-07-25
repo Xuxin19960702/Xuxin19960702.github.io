@@ -4,6 +4,122 @@
   
     
     <entry>
+      <title>剑指 Offer 46. 把数字翻译成字符串</title>
+      <link href="/2021/07/25/arithmetic55/"/>
+      <url>/2021/07/25/arithmetic55/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个数字，我们按照如下规则把它翻译为字符串：0 翻译成 “a” ，1 翻译成 “b”，……，11 翻译成 “l”，……，25 翻译成 “z”。一个数字可能有多个翻译。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><blockquote><p>输入：12258</p><p>输出：5</p><p>解释：12258有5种不同的翻译，分别是”bccfi”, “bwfi”, “bczi”, “mcfi”和”mzi”</p></blockquote><a id="more"></a><h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul><li><code>0 &lt;= num &lt; 231</code></li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>动态规划：<em>f</em>(<em>i</em>)=<em>f</em>(<em>i</em>−1)+<em>f</em>(<em>i</em>−2)</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">translateNum</span><span class="token punctuation">(</span><span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span> ch <span class="token operator">=</span> String<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toCharArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">int</span> len <span class="token operator">=</span> ch<span class="token punctuation">.</span>length<span class="token punctuation">;</span>        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> dp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>len <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>        dp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>        dp<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>            <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token punctuation">(</span>ch<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token string">'0'</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">10</span> <span class="token operator">+</span> <span class="token punctuation">(</span>ch<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token string">'0'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token keyword">if</span><span class="token punctuation">(</span>n <span class="token operator">>=</span> <span class="token number">10</span> <span class="token operator">&amp;&amp;</span> n <span class="token operator">&lt;=</span> <span class="token number">25</span><span class="token punctuation">)</span><span class="token punctuation">{</span>                dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>            <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>                dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>            <span class="token punctuation">}</span>        <span class="token punctuation">}</span>        <span class="token keyword">return</span> dp<span class="token punctuation">[</span>len<span class="token punctuation">]</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指 Offer 57 - II. 和为s的连续正数序列</title>
+      <link href="/2021/07/25/arithmetic54/"/>
+      <url>/2021/07/25/arithmetic54/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入一个正整数 target ，输出所有和为 target 的连续正整数序列（至少含有两个数）。</p><p>序列内的数字由小到大排列，不同序列按照首个数字从小到大排列。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><blockquote><p>输入： target = 15</p><p>   输出：[[1,2,3,4,5],[4,5,6],[7,8]]</p></blockquote><a id="more"></a><h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul><li><code>0 &lt; nums.length &lt;= 100</code></li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>我们用两个指针 l 和 r 表示当前枚举到的以 ll 为起点到 rr 的区间，sum 表示 [l,r][l,r] 的区间和，由求和公式可 O(1) 求得为 sum= (l+r)×(r−l+1)/2，起始 l=1,r=2。</p><p>一共有三种情况：</p><ul><li><p>如果 sum&lt;target 则说明指针 r 还可以向右拓展使得 sum 增大，此时指针 r 向右移动，即 r+=1</p></li><li><p>如果 sum&gt;target 则说明以 l 为起点不存在一个 r 使得 sum=target，此时要枚举下一个起点，指针 l 向右移动，即l+=1</p></li><li><p>如果 sum==target 则说明我们找到了以 l 为起点得合法解 [l,r][l,r] ，我们需要将 [l,r][l,r] 的序列放进答案数组，且我们知道以 l 为起点的合法解最多只有一个，所以需要枚举下一个起点，指针 l 向右移动，即 l+=1</p><p>终止条件即为 l&gt;=r 的时候，这种情况的发生指针 r 移动到了⌊ target/2 ⌋+1 的位置，导致 l&lt;r 的时候区间和始终大于 target 。</p></li></ul><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>    <span class="token keyword">public</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">findContinuousSequence</span><span class="token punctuation">(</span><span class="token keyword">int</span> target<span class="token punctuation">)</span> <span class="token punctuation">{</span>        List<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">></span> vec <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> l <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> r <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> l <span class="token operator">&lt;</span> r<span class="token punctuation">)</span> <span class="token punctuation">{</span>            <span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token punctuation">(</span>l <span class="token operator">+</span> r<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>r <span class="token operator">-</span> l <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>            <span class="token keyword">if</span> <span class="token punctuation">(</span>sum <span class="token operator">==</span> target<span class="token punctuation">)</span> <span class="token punctuation">{</span>                <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> res <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>r <span class="token operator">-</span> l <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> l<span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> r<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>                    res<span class="token punctuation">[</span>i <span class="token operator">-</span> l<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>                <span class="token punctuation">}</span>                vec<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>                l<span class="token operator">++</span><span class="token punctuation">;</span>            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>sum <span class="token operator">&lt;</span> target<span class="token punctuation">)</span> <span class="token punctuation">{</span>                r<span class="token operator">++</span><span class="token punctuation">;</span>            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>                l<span class="token operator">++</span><span class="token punctuation">;</span>            <span class="token punctuation">}</span>        <span class="token punctuation">}</span>        <span class="token keyword">return</span> vec<span class="token punctuation">.</span><span class="token function">toArray</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>vec<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指 Offer 45. 把数组排成最小的数</title>
+      <link href="/2021/07/24/arithmetic53/"/>
+      <url>/2021/07/24/arithmetic53/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入一个非负整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><blockquote><p>输入： [3,30,34,5,9]</p><p>   输出：”3033459”</p></blockquote><a id="more"></a><h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul><li><code>0 &lt; nums.length &lt;= 100</code></li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>此题求拼接起来的最小数字，本质上是一个排序问题。设数组 nums 中任意两数字的字符串为 x 和 y ，则规定 排序判断规则 为：</p><ul><li>若拼接字符串 x + y &gt; y + x，则 x “大于” y ；</li><li>反之，若 x + y &lt; y + x，则 x “小于” y ； </li></ul><ol><li><strong>初始化：</strong> 字符串列表 strs ，保存各数字的字符串格式；</li><li><strong>列表排序：</strong> 应用以上 “排序判断规则” ，对 strs 执行排序；</li><li><strong>返回值：</strong> 拼接 strs 中的所有字符串，并返回。</li></ol><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>    <span class="token keyword">public</span> String <span class="token function">minNumber</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>        String<span class="token punctuation">[</span><span class="token punctuation">]</span> strs <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span>nums<span class="token punctuation">.</span>length<span class="token punctuation">]</span><span class="token punctuation">;</span>        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>            strs<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> String<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        Arrays<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>strs<span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">(</span>x <span class="token operator">+</span> y<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">compareTo</span><span class="token punctuation">(</span>y <span class="token operator">+</span> x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        StringBuilder res <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">for</span><span class="token punctuation">(</span>String s <span class="token operator">:</span> strs<span class="token punctuation">)</span>            res<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指 Offer 57. 和为s的两个数字</title>
+      <link href="/2021/07/24/arithmetic52/"/>
+      <url>/2021/07/24/arithmetic52/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入一个递增排序的数组和一个数字s，在数组中查找两个数，使得它们的和正好是s。如果有多对数字的和等于s，则输出任意一对即可。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><blockquote><p>输入：nums = [2,7,11,15], target = 9</p><p>   输出：[2,7] 或者 [7,2]</p></blockquote><a id="more"></a><h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul><li><code>1 &lt;= nums.length &lt;= 10^5</code></li><li><code>1 &lt;= nums[i] &lt;= 10^6</code></li></ul><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol><li><strong>初始化：</strong> 双指针 i , j 分别指向数组 nums 的左右两端 （俗称对撞双指针）。</li><li><strong>循环搜索：</strong> 当双指针相遇时跳出；<ol><li>计算和 s = nums[i] + nums[j]；</li><li>若 s &gt; target ，则指针 j 向左移动，即执行 j = j - 1；</li><li>若 s &lt; target ，则指针 i 向右移动，即执行 i = i + 1；</li><li>若 s = target ，立即返回数组 [nums[i], nums[j]]；</li></ol></li><li>返回空数组，代表无和为 target 的数字组合。</li></ol><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>    <span class="token keyword">public</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">twoSum</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">,</span> <span class="token keyword">int</span> target<span class="token punctuation">)</span> <span class="token punctuation">{</span>        <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> j <span class="token operator">=</span> nums<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>        <span class="token keyword">while</span><span class="token punctuation">(</span>i <span class="token operator">&lt;</span> j<span class="token punctuation">)</span> <span class="token punctuation">{</span>            <span class="token keyword">int</span> s <span class="token operator">=</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>            <span class="token keyword">if</span><span class="token punctuation">(</span>s <span class="token operator">&lt;</span> target<span class="token punctuation">)</span> i<span class="token operator">++</span><span class="token punctuation">;</span>            <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>s <span class="token operator">></span> target<span class="token punctuation">)</span> j<span class="token operator">--</span><span class="token punctuation">;</span>            <span class="token keyword">else</span> <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>        <span class="token punctuation">}</span>        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>剑指 Offer 56 - II. 数组中数字出现的次数 II</title>
       <link href="/2021/07/22/arithmetic51/"/>
       <url>/2021/07/22/arithmetic51/</url>
