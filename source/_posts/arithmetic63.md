@@ -1,6 +1,6 @@
 ---
 title: 剑指 Offer 54. 二叉搜索树的第k大节点
-date: 2021-07-28 16:41:00
+date: 2021-07-28 09:41:00
 categories: 算法题
 archives:
 tags: [Java,算法,剑指offer]
@@ -15,7 +15,6 @@ tags: [Java,算法,剑指offer]
 > 输入：root = [3,1,4,null,2], k = 1
 >
 > 输出：4
->
 
 <!--more-->
 
@@ -51,6 +50,7 @@ class Solution {
         dfs(root.left);
     }
 }
+
 
 ```
 
