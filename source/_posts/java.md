@@ -10,7 +10,7 @@ tags: [Java,面试]
 
 ### Java入门
 
-#### 面向过程和面向对象的区别
+#### **面向过程和面向对象的区别**
  - **面向过程：面向过程性能比面向对象高**。因为类调用时需要实例化，开销比较大，比较消耗资源，所以当性能是最重要的考量因素的时候，比如单片机、嵌入式开发、Linux/Unix 等一般采用面向过程开发。但是，**面向过程没有面向对象易维护、易复用、易扩展**。
  - **面向对象：面向对象易维护、易复用、易扩展**。因为面向对象有封装、继承、多态性的特性，所以可以设计出低耦合的系统，使系统更加灵活、更加易维护。但是，**面向对象性能比面向过程低**。
 <!--more-->
@@ -18,7 +18,7 @@ tags: [Java,面试]
 ----------
 
 
-#### Java语言有哪些特点?
+#### **Java语言有哪些特点?**
 
  - 简单易学；
  - 面向对象（<font color=#0099ff>封装，继承，多态</font>）；
@@ -34,7 +34,7 @@ tags: [Java,面试]
 ----------
 
 
-#### Java 和 C++ 的区别
+#### **Java 和 C++ 的区别**
  - 都是面向对象语言，都支持封装、继承和多态
  - Java不提供指针来直接访问内存，程序内存更加安全
  - Java的类是单继承的，C++支持多重继承；虽然Java的类不可以多继承，但是接口可以多继承
@@ -43,7 +43,7 @@ tags: [Java,面试]
 
 ---
 
-#### ArrayList，LinkedList 和 Vector的区别
+#### **ArrayList，LinkedList 和 Vector的区别**
 
 1. **ArrayList是最常用的List实现类，内部通过数组实现的，**它允许对元素进行随机访问。数组的缺点是每个元素之间不能有间隔，当数组大小不满足时需要增加存储能力。当从ArrayList的中间位置插入或者删除元素时，需要对数组进行复制、移动、代价比较高。因此，它适合随机查找和遍历，不适合插入和删除。
 2. **Vector与ArrayList一样，也是通过数组实现的，**不同的是它支持线程的同步，即某一时刻只有一个线程能够写Vector，但实现同步需要很高的花费，因此，访问它比访问ArrayList慢。
@@ -51,7 +51,7 @@ tags: [Java,面试]
 
 ---
 
-#### HashMap、Hashtable、LinkedHashMap、ConcurrentHashMap 和 TreeMap之间的区别
+#### **HashMap、Hashtable、LinkedHashMap、ConcurrentHashMap 和 TreeMap之间的区别**
 
 1. **HashMap**是一个最常用的Map，它根据键的hashCode值存储数据，根据键可以直接获取它的值，具有很快的访问速度。HashMap最多只允许一条记录的键为null，不允许多条记录的值为null。HashMap不支持线程的同步，即任一时刻可以有多个线程同时写HashMap，可能会导致数据的不一致。如果需要同步，可以用Collections.synchronizedMap(HashMap map)方法使HashMap具有同步的能力。
 
@@ -67,7 +67,7 @@ tags: [Java,面试]
 
 ---
 
-#### Object类有哪些方法？各有什么作用？
+#### **Object类有哪些方法？各有什么作用？**
 
 1. clone方法
 
@@ -125,10 +125,71 @@ wait方法就是使当前线程等待该对象的锁，当前线程必须是该�
 
 ----------
 
+#### **Redis的数据类型**
 
-#### 什么是 Java 程序的主类 应用程序和小程序的主类有何不同? 
-一个程序中可以有很多个类，但只能有一个类是主类。在Java应用程序中，这个主类是指包含<font color=#0099ff>main()</font> 方法的类。而在Java小程序中，这个主类是一个继承自系统类JApplet或Applet的子类。应用程序的主类不一定要求是public类，但小程序的主类要求必须是public类。主类是Java程序执行的入口点。
-		
+Redis支持五种数据类型：string（字符串），hash（哈希），list（列表），set（集合）及zset(sorted set：有序集合)。
+
+[Redis详解（三）------ redis的六大数据类型详细用法]: https://www.cnblogs.com/ysocean/p/9080940.html
+
+![](java/Redis.png)
+
+1. **String（字符串）**		
+
+string 是 redis 最基本的类型，你可以理解成与 Memcached 一模一样的类型，一个 key 对应一个 value。
+
+string 类型是二进制安全的。意思是 redis 的 string 可以包含任何数据。比如jpg图片或者序列化的对象。
+
+string 类型是 Redis 最基本的数据类型，string 类型的值最大能存储 512MB。
+
+
+
+2. **Hash（哈希）**
+
+Redis hash 是一个键值(key=>value)对集合。
+
+Redis hash 是一个 string 类型的 field 和 value 的映射表，hash 特别适合用于存储对象。
+
+
+
+3. **List（列表）**
+
+Redis 列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）。
+
+
+
+4. **Set（集合）**
+
+   Redis 的 Set 是 string 类型的无序集合。
+
+   集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是 O(1)。
+
+
+
+5. **zset(sorted set：有序集合)**
+
+   Redis zset 和 set 一样也是string类型元素的集合,且不允许重复的成员。
+
+   不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。
+
+   zset的成员是唯一的,但分数(score)却可以重复。
+
+---
+
+#### **Redis数据类型的底层数据结构**
+
+简单动态字符串、链表、字典、跳跃表、整数集合、压缩列表
+
+[Redis详解（四）------ redis的底层数据结构]: https://www.cnblogs.com/ysocean/p/9080942.html
+
+
+
+---
+
+#### Redis持久化机制
+
+[详解Redis中两种持久化机制RDB和AOF（面试常问，工作常用）]: https://baijiahao.baidu.com/s?id=1654694618189745916&amp;wfr=spider&amp;for=pc
+
+
 
 
 ----------
@@ -141,7 +202,7 @@ wait方法就是使当前线程等待该对象的锁，当前线程必须是该�
 
 --------
 
-#### volatile的实现原理？
+#### **volatile的实现原理？**
 
 volatile通常被比喻成"轻量级的synchronized"，也是Java并发编程中比较重要的一个关键字。和synchronized不同，volatile是一个变量修饰符，只能用来修饰变量。无法修饰方法及代码块等。
 
