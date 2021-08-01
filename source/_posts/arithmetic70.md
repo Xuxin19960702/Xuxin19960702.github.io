@@ -1,6 +1,6 @@
 ---
-title: 剑指 Offer 61. 扑克牌中的顺子
-date: 2021-07-30 11:17:00
+title: 剑指 Offer 60. n个骰子的点数
+date: 2021-07-31 18:02:00
 categories: 算法题
 archives:
 tags: [Java,算法,剑指offer]
@@ -8,40 +8,45 @@ tags: [Java,算法,剑指offer]
 
 ## 题目
 
-从扑克牌中随机抽5张牌，判断是不是一个顺子，即这5张牌是不是连续的。2～10为数字本身，A为1，J为11，Q为12，K为13，而大、小王为 0 ，可以看成任意数字。A 不能视为 14。
+把n个骰子扔在地上，所有骰子朝上一面的点数之和为s。输入n，打印出s的所有可能的值出现的概率。
+
+你需要用一个浮点数数组返回答案，其中第 i 个元素代表这 n 个骰子所能掷出的点数集合中第 i 小的那个的概率。
 
 ## 示例
 
-> 输入：[1,2,3,4,5]
+> 输入：1
 > 
->输出： True
+>输出： [0.16667,0.16667,0.16667,0.16667,0.16667,0.16667]
 
 <!--more-->
 
 ## 限制
 
-- 数组长度为 5 
-- 数组的数取值为 [0, 13] .
+- 1 <= n <= 11
 
 ## 思路
 
-1. 先对数组执行排序。
-2. 判别重复： 排序数组中的相同元素位置相邻，因此可通过遍历数组，判断 nums[i] = nums[i + 1] 是否成立来判重。
-3. 获取最大 / 最小的牌： 排序后，数组末位元素 nums[4] 为最大牌；元素 nums[joker] 为最小牌，其中 joker 为大小王的数量。
+[]: https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/solution/jian-zhi-offer-60-n-ge-tou-zi-de-dian-sh-z36d/
+
+
 
 ## 代码
 
 ```java
-// 排序 + 遍历
 class Solution {
-    public boolean isStraight(int[] nums) {
-        int joker = 0;
-        Arrays.sort(nums); // 数组排序
-        for(int i = 0; i < 4; i++) {
-            if(nums[i] == 0) joker++; // 统计大小王数量
-            else if(nums[i] == nums[i + 1]) return false; // 若有重复，提前返回 false
+    public double[] dicesProbability(int n) {
+        double[] dp = new double[6];
+        Arrays.fill(dp, 1.0 / 6.0);
+        for (int i = 2; i <= n; i++) {
+            double[] tmp = new double[5 * i + 1];
+            for (int j = 0; j < dp.length; j++) {
+                for (int k = 0; k < 6; k++) {
+                    tmp[j + k] += dp[j] / 6.0;
+                }
+            }
+            dp = tmp;
         }
-        return nums[4] - nums[joker] < 5; // 最大牌 - 最小牌 < 5 则可构成顺子
+        return dp;
     }
 }
 ```
