@@ -1,58 +1,96 @@
 ---
-title: 剑指 Offer 68 - II. 二叉树的最近公共祖先
-date: 2021-08-04 16:03:00
+title: 剑指 Offer II 112. 最长递增路径
+date: 2021-08-05 15:44:00
 categories: 算法题
 archives:
-tags: [Java,算法,剑指offer]
+tags: [Java,算法]
 ---
 
 ## 题目
 
-给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。
+给定一个 m x n 整数矩阵 matrix ，找出其中 **最长递增路径** 的长度。
+
+对于每个单元格，你可以往上，下，左，右四个方向移动。 **不能** 在 **对角线** 方向上移动或移动到 **边界外**（即不允许环绕）。
 
 ## 示例
 
-> 输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+> 输入：matrix = [[9,9,4],[6,6,8],[2,1,1]]
 >
-> 输出： 3
+> 输出： 4
 >
-> 解释：节点 5 和节点 1 的最近公共祖先是节点 3。
+> 解释：最长递增路径为 [1, 2, 6, 9]。
 
 <!--more-->
 
+![](/arithmetic78/grid1.jpg)
+
 ## 限制
 
-- 所有节点的值都是唯一的。
-- p、q 为不同节点且均存在于给定的二叉树中。
+- m == matrix.length
+- n == matrix[i].length
+- 1 <= m, n <= 200
+- 0 <= matrix[i][j] <= 231 - 1
 
 ## 思路
 
-1. **终止条件：**
-   1. 当越过叶节点，则直接返回 null ；
-   2. 当 root 等于 p, q ，则直接返回 root ；
-2. **递推工作：**
-   1. 开启递归左子节点，返回值记为 left ；
-   2. 开启递归右子节点，返回值记为 right ；
-3. **返回值：** 根据 left 和 right ，可展开为四种情况；
-   1. 当 left 和 right **同时为空 ：**说明 root 的左 / 右子树中都不包含 p,q ，返回 null ；
-   2. 当 left 和 right **同时不为空 ：**说明 p, q 分列在 root 的 **异侧** （分别在 左 / 右子树），因此 root 为最近公共祖先，返回 root ；
-   3. 当 left **为空** ，right **不为空** ：p,q 都不在 root 的左子树中，直接返回 right 。具体可分为两种情况：
-      1. p,q 其中一个在 root 的 **右子树** 中，此时 right 指向 p（假设为 p ）；
-      2. p,q 两节点都在 root 的 **右子树** 中，此时的 right 指向 **最近公共祖先节点** ；
-   4. 当 left **不为空** ， right **为空** ：与情况 3. 同理；
+1. 总体框架为图的深度搜索，遍历矩阵中的每个节点，进行满足递增的深度搜索。
+2. 暴力解法，在第135个case的时候会超时，这个时候引入记忆化搜索，每次搜索的时候，可以去判断这个节点之前有没有搜索过，如果搜索过，则使用之前保存的值
 
 ## 代码
 
 ```java
 class Solution {
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if(root == null || root == p || root == q) return root;
-        TreeNode left = lowestCommonAncestor(root.left, p, q);
-        TreeNode right = lowestCommonAncestor(root.right, p, q);
-        if(left == null && right == null) return null; // 1.
-        if(left == null) return right; // 3.
-        if(right == null) return left; // 4.
-        return root; // 2. if(left != null and right != null)
+    public int longestIncreasingPath(int[][] grid) {
+        int rowSize = grid.length;
+        int colSize = grid[0].length;
+        int lastMax = 0;
+        int[][] has = new int[rowSize][colSize];
+        int[][] dp = new int[rowSize][colSize];
+        for(int i=0;i<rowSize;i++){
+            for(int j=0;j<colSize;j++){
+                int len = dfs(grid,i,j,has,dp);
+                dp[i][j] = len;
+                lastMax = Math.max(len,lastMax);
+            }
+        }
+        return lastMax;
+    }
+
+    private static int dfs(int[][] grid,int row,int col,int[][] has,int[][] dp){
+        if(has[row][col] == 1){
+            return 0 ;
+        }
+        if(dp[row][col] > 0){
+            return dp[row][col];
+        }
+        int rowSize = grid.length;
+        int colSize = grid[0].length;
+
+        int current = grid[row][col];
+        has[row][col] = 1;
+        int size = 0;
+        if(row-1 >= 0 && grid[row-1][col] > current){
+            int res = dfs(grid,row-1,col,has,dp);
+            size = Math.max(size,res);
+        }
+
+        if(row+1 < rowSize && grid[row+1][col] > current){
+            int res = dfs(grid,row+1,col,has,dp);
+            size = Math.max(size,res);
+        }
+
+        if(col-1 >= 0 && grid[row][col-1] > current){
+            int res = dfs(grid,row,col-1,has,dp);
+            size = Math.max(size,res);
+        }
+
+        if(col+1 < colSize && grid[row][col+1] > current){
+            int res = dfs(grid,row,col+1,has,dp);
+            size = Math.max(size,res);
+        }
+        dp[row][col] = Math.max(size+1,dp[row][col]);
+        has[row][col] = 0;
+        return size+1;
     }
 }
 ```
