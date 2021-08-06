@@ -30,7 +30,7 @@ tags: [Java,算法,剑指offer]
 
 
 
-![](arithmetic8\5ff86a743320333d3fe335c711182de37fb0fce958a005064254b4b48b2958a9.gif)
+![](arithmetic8/5ff86a743320333d3fe335c711182de37fb0fce958a005064254b4b48b2958a9.gif)
 
 ## 代码
 

@@ -29,15 +29,25 @@ tags: [Java,算法,剑指offer]
 ## 代码
 
 ```java
+// 方法一
 class Solution {
     public String replaceSpace(String s) {
         StringBuilder res = new StringBuilder();
-        for(Character c : s.toCharArray())
+        for(char c : s.toCharArray())
         {
             if(c == ' ') res.append("%20");
             else res.append(c);
         }
         return res.toString();
+    }
+}
+```
+
+```java
+// 方法二
+class Solution {
+    public String replaceSpace(String s) {
+        return s.replace(" ","%20");
     }
 }
 ```
