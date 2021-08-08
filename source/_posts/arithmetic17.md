@@ -55,15 +55,23 @@ tags: [Java,算法,剑指offer]
 ## 代码
 
 ```java
-public class JumpFloorII {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        System.out.println(JumpFloorII(n));
-    }
-
-    static int JumpFloorII(int number){
-        return 1 << --number; //2^(number-1)用位移操作进行，更快
+class Solution {
+    public boolean findNumberIn2DArray(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return false;
+        }
+        int row = 0, column = matrix[0].length - 1;
+        while (row < matrix.length && column >= 0) {
+            int num = matrix[row][column];
+            if (num == target) {
+                return true;
+            } else if (num > target) {
+                column--;
+            } else {
+                row++;
+            }
+        }
+        return false;
     }
 }
 ```

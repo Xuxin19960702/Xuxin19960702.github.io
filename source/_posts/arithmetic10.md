@@ -29,6 +29,10 @@ s 只包含小写英文字母
 
 动态规划，如下代码注释。
 
+[子序列问题通用思路|最长回文子序列]: https://leetcode-cn.com/problems/longest-palindromic-subsequence/solution/zi-xu-lie-wen-ti-tong-yong-si-lu-zui-chang-hui-wen/
+
+
+
 ## 代码
 
 ```java
@@ -47,27 +51,21 @@ class Solution {
             2、当 s[i] != s[j] ，那么 dp[i][j] = Math.max(dp[i+1][j],dp[i][j-1])
             对上述 dp[i][j] 式子的解释：
             假如序列为 d c b c c（index：0-4），s[0] != s[4] ，则 dp[0][4] = Math.max(dp[0][3],dp[1,4]) = Math.max(2,3) = 3
-
-            注意：上述按我习惯分析是将 i 放在了 j 的前面，而按我写法习惯这里是将 i 放在了 j 的后面，即上面的 dp[i][j] 在这里应该是 dp[j][i]
-            两层 for 循环，令 i 从 0 遍历到 len-1，而 j 为 i-1 递减到 0
-            假如 i = 5，那么 j 的顺序为 4 3 2 1 0，在得到 dp[0][5] 过程中，dp[1][5]等值 就已经提前准备好了，有预先值
-            一个字符单独作为一个回文子序列，即 dp[i][i] = 1
         */
 
-        int len = s.length();
-        int[][] dp = new int[len][len];
-       
-        for(int i = 0; i < len; i++){
-            dp[i][i] = 1;
-            for(int j = i - 1; j >= 0; j--){
-                if(s.charAt(i) == s.charAt(j)){
-                    dp[j][i] = dp[j+1][i-1] + 2;
-                }else{
-                    dp[j][i] = Math.max(dp[j+1][i],dp[j][i-1]);
+        nt n = s.length();
+        int[][] f = new int[n][n];
+        for (int i = n - 1; i >= 0; i--) {
+            f[i][i] = 1;
+            for (int j = i + 1; j < n; j++) {
+                if (s.charAt(i) == s.charAt(j)) {
+                    f[i][j] = f[i + 1][j - 1] + 2;
+                } else {
+                    f[i][j] = Math.max(f[i + 1][j], f[i][j - 1]);
                 }
             }
         }
-        return dp[0][len-1];
+        return f[0][n - 1];
     }
 }
 ```
