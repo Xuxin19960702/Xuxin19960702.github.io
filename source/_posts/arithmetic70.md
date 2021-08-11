@@ -26,9 +26,7 @@ tags: [Java,算法,剑指offer]
 
 ## 思路
 
-[]: https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/solution/jian-zhi-offer-60-n-ge-tou-zi-de-dian-sh-z36d/
-
-
+[LeetCode题解](https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/solution/jian-zhi-offer-60-n-ge-tou-zi-de-dian-sh-z36d/)
 
 ## 代码
 

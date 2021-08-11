@@ -129,7 +129,7 @@ wait方法就是使当前线程等待该对象的锁，当前线程必须是该�
 
 Redis支持五种数据类型：string（字符串），hash（哈希），list（列表），set（集合）及zset(sorted set：有序集合)。
 
-[Redis详解（三）------ redis的六大数据类型详细用法]: https://www.cnblogs.com/ysocean/p/9080940.html
+[Redis详解（三）------ redis的六大数据类型详细用法](https://www.cnblogs.com/ysocean/p/9080940.html)
 
 ![](java/Redis.png)
 
@@ -178,6 +178,7 @@ Redis 列表是简单的字符串列表，按照插入顺序排序。你可以�
 #### **Redis数据类型的底层数据结构**
 
 简单动态字符串、链表、字典、跳跃表、整数集合、压缩列表
+[Redis详解（四）------ redis的底层数据结构][Redis详解（四）------ redis的底层数据结构]
 
 [Redis详解（四）------ redis的底层数据结构]: https://www.cnblogs.com/ysocean/p/9080942.html
 
@@ -187,7 +188,7 @@ Redis 列表是简单的字符串列表，按照插入顺序排序。你可以�
 
 #### Redis持久化机制
 
-[详解Redis中两种持久化机制RDB和AOF（面试常问，工作常用）]: https://baijiahao.baidu.com/s?id=1654694618189745916&amp;wfr=spider&amp;for=pc
+[详解Redis中两种持久化机制RDB和AOF（面试常问，工作常用）]( https://baijiahao.baidu.com/s?id=1654694618189745916&amp;wfr=spider&amp;for=pc)
 
 
 
@@ -222,7 +223,7 @@ volatile的用法比较简单，只需要在声明一个可能被多线程同时
 
 #### 常见排序算法及其对应的时间复杂度和空间复杂度
 
-[常见排序算法及其对应的时间复杂度和空间复杂度]: https://www.cnblogs.com/zwtgyh/p/10631760.html
+[常见排序算法及其对应的时间复杂度和空间复杂度](https://www.cnblogs.com/zwtgyh/p/10631760.html)
 
 ---
 
@@ -236,7 +237,7 @@ volatile的用法比较简单，只需要在声明一个可能被多线程同时
 
 首先我们之前说到过 HashMap 在第一次 put 的时候，会进行哈希数组的初始化，我们想想这次会有线程安全问题么？肯定有呀，要是两个线程同时对 HashMap 进行初始化，那么我们不就有了两个 哈希数组了么？
 
-[剖析HashMap的线程不安全到ConCurrentHashMap如何保证其安全性]: https://blog.csdn.net/newbie0107/article/details/101164483
+[剖析HashMap的线程不安全到ConCurrentHashMap如何保证其安全性](https://blog.csdn.net/newbie0107/article/details/101164483)
 
 
 

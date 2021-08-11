@@ -29,9 +29,7 @@ s 只包含小写英文字母
 
 动态规划，如下代码注释。
 
-[子序列问题通用思路|最长回文子序列]: https://leetcode-cn.com/problems/longest-palindromic-subsequence/solution/zi-xu-lie-wen-ti-tong-yong-si-lu-zui-chang-hui-wen/
-
-
+[LeetCode题解](https://leetcode-cn.com/problems/longest-palindromic-subsequence/solution/zi-xu-lie-wen-ti-tong-yong-si-lu-zui-chang-hui-wen/)
 
 ## 代码
 
