@@ -1,6 +1,6 @@
 ---
-title: 跳跃游戏
-date: 2021-08-11 18:32:00
+title: 反转字符串中的单词 III
+date: 2021-08-12 18:32:00
 categories: 算法题
 archives:
 tags: [Java,算法]
@@ -8,59 +8,60 @@ tags: [Java,算法]
 
 ## 题目
 
-给定一个非负整数数组 `nums` ，你最初位于数组的 **第一个下标** 。
-
-数组中的每个元素代表你在该位置可以跳跃的最大长度。
-
-判断你是否能够到达最后一个下标。
-
-<!--more-->
+给定一个字符串，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。
 
 ## 示例
 
-> 输入：nums = [2,3,1,1,4]
+> 输入："Let's take LeetCode contest"
 >
-> 输出：true
+> 输出："s'teL ekat edoCteeL tsetnoc"
 >
-> 解释：可以先跳 1 步，从下标 0 到达下标 1, 然后再从下标 1 跳 3 步到达最后一个下标。
->
+
+<!--more-->
 
 ## 限制
 
-- `1 <= nums.length <= 3 * 104`
-- `0 <= nums[i] <= 105`
+- 在字符串中，每个单词由单个空格分隔，并且字符串中不会有任何额外的空格。
 
 ## 思路
 
-我们可以用贪心的方法解决这个问题。
-
-设想一下，对于数组中的任意一个位置 y，我们如何判断它是否可以到达？根据题目的描述，只要存在一个位置 x，它本身可以到达，并且它跳跃的最大长度为 x+nums[x]，这个值大于等于 yy，即 x+nums[x]≥y，那么位置 y 也可以到达。
-
-换句话说，对于每一个可以到达的位置 xx，它使得 x+1,x+2,⋯,x+nums[x] 这些连续的位置都可以到达。
-
-这样以来，我们依次遍历数组中的每一个位置，并实时维护 最远可以到达的位置。对于当前遍历到的位置 x，如果它在 最远可以到达的位置 的范围内，那么我们就可以从起点通过若干次跳跃到达该位置，因此我们可以用 x+nums[x] 更新 最远可以到达的位置。
-
-在遍历的过程中，如果 最远可以到达的位置 大于等于数组中的最后一个位置，那就说明最后一个位置可达，我们就可以直接返回 True 作为答案。反之，如果在遍历结束后，最后一个位置仍然不可达，我们就返回 False 作为答案。
+把字符串转成字符数组，遍历字符数组；
+我们只关心空格字符和最后一个字符，于是，遇到正常的字母字符一概不管；
+当遇到空格字符，就需要对刚刚遍历过的单词进行反转操作，此单词的右索引是 i - 1，如何获取左索引？定义一个int变量start，用来记录单词的左索引；
+利用字符数组前后交换字符位置的方法进行反转操作；反转结束后，把start索引置为 i + 1，指向下一个单词的开头；
+遍历继续，直到遇到下一个空格字符或结尾；
+到了字符数组结尾，那么最后一个单词的开头和结束索引分别是 start 和 n - 1，利用这两个索引进行单词翻转；
+最后用String的构造方法，将char数组转成答案返回。
 
 ## 代码
 
 ```java
-public boolean canJump(int[] nums) {
-    // 当前能够跳跃的最远下标
-    int max = 0;
-    int n = nums.length;
-    for (int i = 0; i < n; i++) {
-        // i <= max，表示能够达到下标 i 处
-        if (i <= max) {
-            // 更新 max 值
-            max = Math.max(max, nums[i] + i);
-            // 如果 max >= n-1，说明从当前位置能够跳跃到最后
-            if (max >= n - 1) {
-                return true;
+class Solution {
+    public String reverseWords(String s) {
+        char[] array = s.toCharArray();
+        int start = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == ' ') {
+                reverse(array, start, i - 1);
+                start = i + 1; // 更新start为下一个单词的左索引
+                continue;
+            }
+            if (i == array.length - 1) {
+                reverse(array, start, i);
             }
         }
+        return new String(array);
     }
-    return false;
+
+    private void reverse(char[] array, int l, int r) {
+        while (l < r) {
+            char temp = array[l];
+            array[l] = array[r];
+            array[r] = temp;
+            l += 1;
+            r -= 1;
+        }
+    }
 }
 ```
 
