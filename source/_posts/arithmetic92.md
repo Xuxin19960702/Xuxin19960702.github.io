@@ -39,7 +39,7 @@ b = arr[j] ^ arr[j + 1] ^ ... ^ arr[k]
 
 S<sub>i</sub> ⊕ S<sub>j</sub> = (arr<sub>0</sub> ⊕ arr<sub>1</sub> ⊕⋯⊕ arr<sub>i−1</sub>) ⊕ (arr<sub>0</sub> ⊕ arr<sub>1</sub> ⊕⋯⊕ arr<sub>i−1</sub> ⊕ arr<sub>i</sub> ⊕⋯⊕ arr<sub>j−1</sub>）
 
-由于异或运算满足结合律和交换律，且任意数异或自身等于 00，上式可化简为:
+由于异或运算满足结合律和交换律，且任意数异或自身等于 0，上式可化简为:
 
 S<sub>i</sub> ⊕ S<sub>j</sub> = (arr<sub>i</sub>  ⊕⋯⊕ arr<sub>j</sub>) 
 

@@ -1,6 +1,6 @@
 ---
 title: Java面试知识汇总
-date: 2021-07-30 11:25:06
+date: 2021-08-16 11:25:06
 categories: Java面试
 archives:
 tags: [Java,面试]
@@ -190,7 +190,16 @@ Redis 列表是简单的字符串列表，按照插入顺序排序。你可以�
 
 [详解Redis中两种持久化机制RDB和AOF（面试常问，工作常用）]( https://baijiahao.baidu.com/s?id=1654694618189745916&amp;wfr=spider&amp;for=pc)
 
+---
 
+#### 详解第一范式、第二范式、第三范式、BCNF范式
+
+- [x] 1NF： 字段是最小的的单元不可再分
+- [x] 2NF：满足1NF,表中的字段必须完全依赖于全部主键而非部分主键 (解决部分函数依赖问题)
+- [x] 3NF：满足2NF,非主键外的所有字段必须互不依赖（解决传递函数依赖问题）
+- [ ] 4NF：满足3NF,消除表中的多值依赖
+
+[详解第一范式、第二范式、第三范式、BCNF范式](https://blog.csdn.net/Wenco1/article/details/88077279?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-2.baidujsUnder6&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-2.baidujsUnder6)
 
 
 ----------
