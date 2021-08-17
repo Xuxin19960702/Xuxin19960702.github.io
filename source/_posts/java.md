@@ -6,11 +6,7 @@ archives:
 tags: [Java,面试]
 ---
 
-## Java 基本功
-
-### Java入门
-
-#### **面向过程和面向对象的区别**
+## **面向过程和面向对象的区别**
  - **面向过程：面向过程性能比面向对象高**。因为类调用时需要实例化，开销比较大，比较消耗资源，所以当性能是最重要的考量因素的时候，比如单片机、嵌入式开发、Linux/Unix 等一般采用面向过程开发。但是，**面向过程没有面向对象易维护、易复用、易扩展**。
  - **面向对象：面向对象易维护、易复用、易扩展**。因为面向对象有封装、继承、多态性的特性，所以可以设计出低耦合的系统，使系统更加灵活、更加易维护。但是，**面向对象性能比面向过程低**。
 <!--more-->
@@ -18,7 +14,7 @@ tags: [Java,面试]
 ----------
 
 
-#### **Java语言有哪些特点?**
+## **Java语言有哪些特点?**
 
  - 简单易学；
  - 面向对象（<font color=#0099ff>封装，继承，多态</font>）；
@@ -34,7 +30,7 @@ tags: [Java,面试]
 ----------
 
 
-#### **Java 和 C++ 的区别**
+## **Java 和 C++ 的区别**
  - 都是面向对象语言，都支持封装、继承和多态
  - Java不提供指针来直接访问内存，程序内存更加安全
  - Java的类是单继承的，C++支持多重继承；虽然Java的类不可以多继承，但是接口可以多继承
@@ -43,7 +39,7 @@ tags: [Java,面试]
 
 ---
 
-#### **ArrayList，LinkedList 和 Vector的区别**
+## **ArrayList，LinkedList 和 Vector的区别**
 
 1. **ArrayList是最常用的List实现类，内部通过数组实现的，**它允许对元素进行随机访问。数组的缺点是每个元素之间不能有间隔，当数组大小不满足时需要增加存储能力。当从ArrayList的中间位置插入或者删除元素时，需要对数组进行复制、移动、代价比较高。因此，它适合随机查找和遍历，不适合插入和删除。
 2. **Vector与ArrayList一样，也是通过数组实现的，**不同的是它支持线程的同步，即某一时刻只有一个线程能够写Vector，但实现同步需要很高的花费，因此，访问它比访问ArrayList慢。
@@ -51,7 +47,7 @@ tags: [Java,面试]
 
 ---
 
-#### **HashMap、Hashtable、LinkedHashMap、ConcurrentHashMap 和 TreeMap之间的区别**
+## **HashMap、Hashtable、LinkedHashMap、ConcurrentHashMap 和 TreeMap之间的区别**
 
 1. **HashMap**是一个最常用的Map，它根据键的hashCode值存储数据，根据键可以直接获取它的值，具有很快的访问速度。HashMap最多只允许一条记录的键为null，不允许多条记录的值为null。HashMap不支持线程的同步，即任一时刻可以有多个线程同时写HashMap，可能会导致数据的不一致。如果需要同步，可以用Collections.synchronizedMap(HashMap map)方法使HashMap具有同步的能力。
 
@@ -67,7 +63,7 @@ tags: [Java,面试]
 
 ---
 
-#### **Object类有哪些方法？各有什么作用？**
+## **Object类有哪些方法？各有什么作用？**
 
 1. **clone方法**
 
@@ -125,7 +121,7 @@ wait方法就是使当前线程等待该对象的锁，当前线程必须是该�
 
 ----------
 
-#### **Redis的数据类型**
+## **Redis的数据类型**
 
 Redis支持五种数据类型：string（字符串），hash（哈希），list（列表），set（集合）及zset(sorted set：有序集合)。
 
@@ -175,7 +171,7 @@ Redis 列表是简单的字符串列表，按照插入顺序排序。你可以�
 
 ---
 
-#### **Redis数据类型的底层数据结构**
+## **Redis数据类型的底层数据结构**
 
 简单动态字符串、链表、字典、跳跃表、整数集合、压缩列表
 [Redis详解（四）------ redis的底层数据结构][Redis详解（四）------ redis的底层数据结构]
@@ -186,13 +182,13 @@ Redis 列表是简单的字符串列表，按照插入顺序排序。你可以�
 
 ---
 
-#### Redis持久化机制
+## Redis持久化机制
 
 [详解Redis中两种持久化机制RDB和AOF（面试常问，工作常用）]( https://baijiahao.baidu.com/s?id=1654694618189745916&amp;wfr=spider&amp;for=pc)
 
 ---
 
-#### 详解第一范式、第二范式、第三范式、BCNF范式
+## 详解第一范式、第二范式、第三范式、BCNF范式
 
 - [x] 1NF： 字段是最小的的单元不可再分
 - [x] 2NF：满足1NF,表中的字段必须完全依赖于全部主键而非部分主键 (解决部分函数依赖问题)
@@ -201,18 +197,70 @@ Redis 列表是简单的字符串列表，按照插入顺序排序。你可以�
 
 [详解第一范式、第二范式、第三范式、BCNF范式](https://blog.csdn.net/Wenco1/article/details/88077279?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-2.baidujsUnder6&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-2.baidujsUnder6)
 
+---
+
+## B树与B+树简明扼要的区别
+
+**B树** : 每个节点都存储key和data，所有节点组成这棵树，并且叶子节点指针为null。
+
+![](java/BTree.png)
+
+**B+树** : 只有叶子节点存储data，叶子节点包含了这棵树的所有键值，叶子节点不存储指针。
+
+![](java/B+Tree.png)
+
+后来，在B+树上增加了**顺序访问指针**，也就是每个叶子节点增加一个指向相邻叶子节点的指针，这样一棵树成了数据库系统实现索引的首选数据结构。 
+
+  原因有很多，最主要的是这棵树矮胖，呵呵。一般来说，索引很大，往往以索引文件的形式存储的磁盘上，索引查找时产生磁盘I/O消耗，相对于内存存取，I/O存取的消耗要高几个数量级，所以评价一个数据结构作为索引的优劣最重要的指标就是在查找过程中磁盘I/O操作次数的时间复杂度。树高度越小，I/O次数越少。 
+
+  **那为什么是B+树而不是B树呢，因为它内节点不存储data，这样一个节点就可以存储更多的key。**
+
+---
+
+## 在MySQL中，最常用的两个存储引擎是MyISAM和InnoDB
+
+**MyISAM** : data存的是数据地址。索引是索引，数据是数据。索引放在XX.MYI文件中，数据放在XX.MYD文件中，所以也叫非聚集索引。
+
+![](java/MyISAM.png)
+
+**InnoDB** : data存的是数据本身。索引也是数据。数据和索引存在一个XX.IDB文件中，所以也叫聚集索引。
+
+![](java/InnoDB.png)
+
+两种存储引擎的区别：
+
+1、MyISAM是非事务安全的，而InnoDB是事务安全的
+
+2、MyISAM锁的粒度是表级的，而InnoDB支持行级锁
+
+3、MyISAM支持全文类型索引，而InnoDB不支持全文索引
+
+4、MyISAM相对简单，效率上要优于InnoDB，小型应用可以考虑使用MyISAM
+
+5、MyISAM表保存成文件形式，跨平台使用更加方便
+
+6、MyISAM管理非事务表，提供高速存储和检索以及全文搜索能力，如果在应用中执行大量select操作可选择
+
+7、InnoDB用于事务处理，具有ACID事务支持等特性，如果在应用中执行大量insert和update操作，可选择。
+
+---
+
+## MySQL的MVCC及实现原理
+
+[【MySQL笔记】正确的理解MySQL的MVCC及实现原理](https://blog.csdn.net/SnailMann/article/details/94724197?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-2.essearch_pc_relevant&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-2.essearch_pc_relevant)
+
 
 ----------
 
-#### JVM的CMS的步骤？为什么要执行第二部的并发标记？
+## JVM的CMS的步骤？为什么要执行第二部的并发标记？
 
 ---------
 
-#### GCRoot的对象有哪些？
+## GCRoot的对象有哪些？
 
 --------
 
-#### **volatile的实现原理？**
+## **volatile的实现原理？**
 
 volatile通常被比喻成"轻量级的synchronized"，也是Java并发编程中比较重要的一个关键字。和synchronized不同，volatile是一个变量修饰符，只能用来修饰变量。无法修饰方法及代码块等。
 
@@ -230,19 +278,19 @@ volatile的用法比较简单，只需要在声明一个可能被多线程同时
 
 ---
 
-#### 常见排序算法及其对应的时间复杂度和空间复杂度
+## 常见排序算法及其对应的时间复杂度和空间复杂度
 
 [常见排序算法及其对应的时间复杂度和空间复杂度](https://www.cnblogs.com/zwtgyh/p/10631760.html)
 
 ---
 
-**GC垃圾回收算法**
+## **GC垃圾回收算法**
 
 ![](java/GC.png)
 
 ---
 
-#### HashMap为什么线程不安全？ConcurrentHashMap的原理？
+## HashMap为什么线程不安全？ConcurrentHashMap的原理？
 
 首先我们之前说到过 HashMap 在第一次 put 的时候，会进行哈希数组的初始化，我们想想这次会有线程安全问题么？肯定有呀，要是两个线程同时对 HashMap 进行初始化，那么我们不就有了两个 哈希数组了么？
 
@@ -252,33 +300,31 @@ volatile的用法比较简单，只需要在声明一个可能被多线程同时
 
 ---
 
-#### synchronized的原理？
-
-
+## synchronized的原理？
 
 ---
 
-#### 分布式锁有哪些实现方式？
+## 分布式锁有哪些实现方式？
 
 ---
 
-#### [redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)怎么实现分布式锁？
+## [redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)怎么实现分布式锁？
 
 ---
 
-#### 给了一个[redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)分布式锁的场景，问是否发生死锁？
+## 给了一个[redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)分布式锁的场景，问是否发生死锁？
 
 ---
 
-#### [redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)分布式锁除了设置过期时间外，还有什么办法可以解决死锁？
+## [redis](https://www.nowcoder.com/jump/super-jump/word?word=redis)分布式锁除了设置过期时间外，还有什么办法可以解决死锁？
 
 ---
 
-#### Zookepeer又怎么实现分布式锁?
+## Zookepeer又怎么实现分布式锁?
 
 ---
 
-#### 分布式事务有哪些实现方式？
+## 分布式事务有哪些实现方式？
 
 ---
 
