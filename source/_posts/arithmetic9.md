@@ -28,6 +28,18 @@ s` 仅由数字和英文字母（大写和/或小写）组成
 
 我们仔细观察一下方法一中的状态转移方程：
 
+```html
+<div>
+$$
+\begin{cases}
+P(i,i) & = & true \
+P(i,i+1) & = & (S_i == S_{i+1}) \
+P(i,j) & = & P(i+1,j-1) \bigwedge (S_i == S_j)
+\end{cases}
+$$
+</div>
+```
+
 $$
 \begin{cases}
 P(i,i) & = & true \\

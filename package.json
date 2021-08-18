@@ -33,6 +33,7 @@
     "hexo-renderer-stylus": "^0.2.3",
     "hexo-server": "^1.0.0",
     "hexo-wordcount": "^6.0.1",
+    "katex": "^0.13.13",
     "valine": "^1.4.14"
   }
 }
